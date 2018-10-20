@@ -1,0 +1,23 @@
+server:
+  port: 10000
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/ZLZSCHOOL?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: hychyc423
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 30000
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 10
+
+mybatis:
+#    config-location: classpath:/db/mybatis-config.xml
+    mapper-locations: classpath:db/mappers/*.xml
+    type-aliases-package: com.entity

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ClasssDao">
+    <resultMap id="Classs" type="com.entity.Classs">
+        <id column="id" property="id" />
+        <result column="grade" property="grade" />
+        <result column="classname" property="classname" />
+        <result column="master" property="master" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <insert id="insertClasss" parameterType="com.entity.Classs" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO class (id,grade,classname,master,remark)
+        VALUES
+        (#{id},#{grade},#{classname},#{master},#{remark})
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+    
+    <select id="getClasssByName" parameterType="String" resultMap="Classs">
+        SELECT * FROM class WHERE classname = #{classname}
+    </select>
+
+    <select id="getAllClasses" resultMap="Classs">
+        SELECT * FROM class
+    </select>
+
+
+</mapper>

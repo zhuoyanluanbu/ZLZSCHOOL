@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.StudentDao">
+    <resultMap id="Student" type="com.entity.Student">
+        <id column="id" property="id"/>
+        <result column="studentnum" property="studentnum"/>
+        <result column="studentname" property="studentName"/>
+        <result column="sex" property="sex"/>
+        <result column="birthday" property="birthday"/>
+        <result column="politicalstatus" property="politicalstatus"/>
+        <result column="educationallevel" property="educationallevel"/>
+        <result column="idnumber" property="idnumber"/>
+        <result column="phone" property="phone"/>
+        <result column="homeaddress" property="homeaddress"/>
+        <result column="qqnumber" property="qqnumber"/>
+        <result column="wechatnumber" property="wechatnumber"/>
+        <result column="issmoke" property="issmoke"/>
+        <result column="smokeage" property="smokeage"/>
+        <result column="whysmoke" property="whysmoke"/>
+        <result column="islove" property="islove"/>
+        <result column="whylove" property="whylove"/>
+        <result column="loverinformation" property="loverinformation"/>
+        <result column="isviolence" property="isviolence"/>
+        <result column="whyviolence" property="whyviolence"/>
+        <result column="medicalhistory" property="medicalhistory"/>
+        <result column="lifeexpenses" property="lifeexpenses"/>
+        <result column="homeincome" property="homeincome"/>
+        <result column="hobby" property="hobby"/>
+        <result column="performance" property="performance"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.entity.Student" useGeneratedKeys="true"
+            keyColumn="id"
+            keyProperty="id">
+      INSERT INTO student (id,studentnum,studentname,sex,birthday,politicalstatus,educationallevel,idnumber,phone,
+      homeaddress,qqnumber,wechatnumber,issmoke,smokeage,whysmoke,islove,whylove,loverinformation,isviolence,whyviolence,
+      medicalhistory,lifeexpenses,homeincome,hobby,performance,remark)
+      VALUES
+      (#{id},#{studentnum},#{studentName},#{sex},#{birthday},#{politicalstatus},#{educationallevel},#{idnumber},#{phone},
+      #{homeaddress},#{qqnumber},#{wechatnumber},#{issmoke},#{smokeage},#{whysmoke},#{islove},#{whylove},#{loverinformation},
+      #{isviolence},#{whyviolence},#{medicalhistory},#{lifeexpenses},#{homeincome},#{hobby},#{performance},#{remark})
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <select id="selectByStuName" parameterType="String" resultMap="Student">
+        SELECT * FROM student WHERE studentname = #{stuName}
+    </select>
+</mapper>

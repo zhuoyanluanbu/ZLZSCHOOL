@@ -12,13 +12,15 @@ public class Classs extends MyObject{
     private String classname;
     private String master;
     private String remark;
+    private int state;
 
-    public Classs(int id, int grade, String classname, String master, String remark) {
+    public Classs(int id, int grade, String classname, String master, String remark,int state) {
         this.id = id;
         this.grade = grade;
         this.classname = classname;
         this.master = master;
         this.remark = remark;
+        this.state = state;
     }
 
     public Classs() {
@@ -62,5 +64,13 @@ public class Classs extends MyObject{
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }

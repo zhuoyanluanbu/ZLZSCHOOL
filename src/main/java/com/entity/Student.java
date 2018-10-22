@@ -31,6 +31,7 @@ public class Student extends MyObject {
     private String hobby;//兴趣爱好
     private String performance;//表现
     private String remark;
+    private int state;
 
 
     public int getId() {
@@ -243,7 +244,7 @@ public class Student extends MyObject {
 
     public Student(){}
 
-    public Student(int id, String studentnum, String studentName, int sex, String birthday, String politicalstatus, String educationallevel, String idnumber, String phone, String homeaddress, String qqnumber, String wechatnumber, int issmoke, int smokeage, String whysmoke, int islove, String whylove, String loverinformation, int isviolence, String whyviolence, String medicalhistory, String lifeexpenses, String homeincome, String hobby, String performance, String remark) {
+    public Student(int id, String studentnum, String studentName, int sex, String birthday, String politicalstatus, String educationallevel, String idnumber, String phone, String homeaddress, String qqnumber, String wechatnumber, int issmoke, int smokeage, String whysmoke, int islove, String whylove, String loverinformation, int isviolence, String whyviolence, String medicalhistory, String lifeexpenses, String homeincome, String hobby, String performance, String remark,int state) {
         this.id = id;
         this.studentnum = studentnum;
         this.studentName = studentName;
@@ -270,5 +271,6 @@ public class Student extends MyObject {
         this.hobby = hobby;
         this.performance = performance;
         this.remark = remark;
+        this.state = state;
     }
 }

@@ -8,6 +8,7 @@
         <result column="classname" property="classname" />
         <result column="master" property="master" />
         <result column="remark" property="remark" />
+        <result column="state" property="state" />
     </resultMap>
 
     <insert id="insertClasss" parameterType="com.entity.Classs" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
@@ -18,7 +19,11 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
-    
+
+    <update id="updateClasss" parameterType="com.entity.Classs">
+        UPDATE class SET grade=#{grade},classname=#{classname},master=#{master},remark=#{remark},state=#{state}
+    </update>
+
     <select id="getClasssByName" parameterType="String" resultMap="Classs">
         SELECT * FROM class WHERE classname = #{classname}
     </select>

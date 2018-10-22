@@ -1,6 +1,5 @@
 package com.controller;
 
-import com.dao.ClasssDao;
 import com.entity.Classs;
 import com.service.ClasssService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,11 @@ public class ClasssController {
     @RequestMapping(value = "/insert",method = RequestMethod.POST)
     public Classs insert(@RequestBody Classs classs) throws Exception{
         return classsService.insertClasss(classs);
+    }
+
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    public Classs update(@RequestBody Classs classs) throws Exception{
+        return classsService.updateClasss(classs);
     }
 
     @RequestMapping(value = "/name",method = RequestMethod.GET)

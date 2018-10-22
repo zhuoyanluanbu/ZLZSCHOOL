@@ -29,6 +29,7 @@
         <result column="hobby" property="hobby"/>
         <result column="performance" property="performance"/>
         <result column="remark" property="remark"/>
+        <result column="state" property="state" />
     </resultMap>
 
     <insert id="insert" parameterType="com.entity.Student" useGeneratedKeys="true"
@@ -36,17 +37,27 @@
             keyProperty="id">
       INSERT INTO student (id,studentnum,studentname,sex,birthday,politicalstatus,educationallevel,idnumber,phone,
       homeaddress,qqnumber,wechatnumber,issmoke,smokeage,whysmoke,islove,whylove,loverinformation,isviolence,whyviolence,
-      medicalhistory,lifeexpenses,homeincome,hobby,performance,remark)
+      medicalhistory,lifeexpenses,homeincome,hobby,performance,remark,state)
       VALUES
       (#{id},#{studentnum},#{studentName},#{sex},#{birthday},#{politicalstatus},#{educationallevel},#{idnumber},#{phone},
       #{homeaddress},#{qqnumber},#{wechatnumber},#{issmoke},#{smokeage},#{whysmoke},#{islove},#{whylove},#{loverinformation},
-      #{isviolence},#{whyviolence},#{medicalhistory},#{lifeexpenses},#{homeincome},#{hobby},#{performance},#{remark})
+      #{isviolence},#{whyviolence},#{medicalhistory},#{lifeexpenses},#{homeincome},#{hobby},#{performance},#{remark},#{state})
         <selectKey resultType="int" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
 
     <select id="selectByStuName" parameterType="String" resultMap="Student">
-        SELECT * FROM student WHERE studentname = #{stuName}
+      SELECT * FROM student WHERE studentname = #{stuName}
     </select>
+
+    <update id="updateStudent" parameterType="com.entity.Student">
+      UPDATE student SET studentnum=#{studentnum},studentname=#{studentName},sex=#{sex},birthday=#{birthday},
+      politicalstatus=#{politicalstatus},educationallevel=#{educationallevel},idnumber=#{idnumber},phone=#{phone},
+      homeaddress=#{homeaddress},qqnumber=#{qqnumber},wechatnumber=#{wechatnumber},issmoke=#{issmoke},smokeage=#{smokeage},
+      whysmoke=#{whysmoke},islove=#{islove},whylove=#{whylove},loverinformation=#{loverinformation},isviolence=#{isviolence},
+      whyviolence=#{whyviolence},medicalhistory=#{medicalhistory},lifeexpenses=#{lifeexpenses},#{homeincome},
+      hobby=#{hobby},performance=#{performance},remark=#{remark},state=#{state}
+      WHERE id=#{id}
+    </update>
 </mapper>

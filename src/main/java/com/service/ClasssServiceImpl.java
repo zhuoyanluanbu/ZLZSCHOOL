@@ -24,6 +24,12 @@ public class ClasssServiceImpl implements ClasssService {
     }
 
     @Override
+    public Classs updateClasss(Classs classs) throws SQLException {
+        classsDao.updateClasss(classs);
+        return classs;
+    }
+
+    @Override
     public List<Classs> getClasssByName(String claName) throws SQLException {
         return classsDao.getClasssByName(claName);
     }
@@ -32,4 +38,6 @@ public class ClasssServiceImpl implements ClasssService {
     public List<Classs> getAllClasses() throws SQLException {
         return classsDao.getAllClasses();
     }
+
+
 }

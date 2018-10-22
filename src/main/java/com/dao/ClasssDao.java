@@ -18,4 +18,6 @@ public interface ClasssDao {
 
     List<Classs> getAllClasses() throws SQLException;
 
+    Classs updateClasss(Classs classs) throws SQLException;
+
 }

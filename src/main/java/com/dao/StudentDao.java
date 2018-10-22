@@ -17,4 +17,6 @@ public interface StudentDao {
 
     List<Student> selectByStuName(String stuName) throws SQLException;
 
+    Student updateStudent(Student student) throws SQLException;
+
 }

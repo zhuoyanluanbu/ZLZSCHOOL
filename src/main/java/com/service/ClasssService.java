@@ -1,6 +1,7 @@
 package com.service;
 
 import com.entity.Classs;
+import org.apache.ibatis.jdbc.SQL;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -15,5 +16,7 @@ public interface ClasssService {
     List<Classs> getClasssByName(String claName) throws SQLException;
 
     List<Classs> getAllClasses() throws SQLException;
+
+    Classs updateClasss(Classs classs) throws SQLException;
 
 }

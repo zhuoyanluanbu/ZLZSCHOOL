@@ -5,7 +5,7 @@ package com.entity;
  */
 public class Student extends MyObject {
 
-    private int id;
+    private long id;
     private String studentnum;//学号
     private String studentName;
     private int sex;
@@ -34,11 +34,11 @@ public class Student extends MyObject {
     private int state;
 
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -244,7 +244,7 @@ public class Student extends MyObject {
 
     public Student(){}
 
-    public Student(int id, String studentnum, String studentName, int sex, String birthday, String politicalstatus, String educationallevel, String idnumber, String phone, String homeaddress, String qqnumber, String wechatnumber, int issmoke, int smokeage, String whysmoke, int islove, String whylove, String loverinformation, int isviolence, String whyviolence, String medicalhistory, String lifeexpenses, String homeincome, String hobby, String performance, String remark,int state) {
+    public Student(long id, String studentnum, String studentName, int sex, String birthday, String politicalstatus, String educationallevel, String idnumber, String phone, String homeaddress, String qqnumber, String wechatnumber, int issmoke, int smokeage, String whysmoke, int islove, String whylove, String loverinformation, int isviolence, String whyviolence, String medicalhistory, String lifeexpenses, String homeincome, String hobby, String performance, String remark,int state) {
         this.id = id;
         this.studentnum = studentnum;
         this.studentName = studentName;
@@ -272,5 +272,9 @@ public class Student extends MyObject {
         this.performance = performance;
         this.remark = remark;
         this.state = state;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new Student().toString());
     }
 }

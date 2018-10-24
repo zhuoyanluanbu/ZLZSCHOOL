@@ -19,19 +19,19 @@ public class ClasssServiceImpl implements ClasssService {
 
     @Override
     public Classs insertClasss(Classs classs) throws SQLException {
-        classsDao.insertClasss(classs);
+        classsDao.insert(classs);
         return classs;
     }
 
     @Override
     public Classs updateClasss(Classs classs) throws SQLException {
-        classsDao.updateClasss(classs);
+        classsDao.update(classs);
         return classs;
     }
 
     @Override
     public List<Classs> getClasssByName(String claName) throws SQLException {
-        return classsDao.getClasssByName(claName);
+        return classsDao.selectByName(claName);
     }
 
     @Override

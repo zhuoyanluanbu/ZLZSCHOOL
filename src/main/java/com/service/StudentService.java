@@ -14,6 +14,9 @@ public interface StudentService {
 
     Student insert(Student student) throws SQLException;
 
+    Student update(Student student) throws SQLException;
+
     List<Student> getStudentByStuName(String stuName) throws SQLException;
 
+    List<Student> getStudentByClassId(int classsId) throws SQLException;
 }

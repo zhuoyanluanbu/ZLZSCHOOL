@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.SubjectDao">
+    <resultMap id="Subject" type="com.entity.Subject">
+        <id column="id" property="id" />
+        <result column="subjectname" property="subjectname" />
+        <result column="class_id" property="class_id" />
+        <result column="remark" property="remark" />
+        <result column="state" property="state" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.entity.Subject"
+            keyColumn="id" useGeneratedKeys="true" keyProperty="id">
+        INSERT t_subject INTO (id,subjectname,class_id,remark,state)
+        VALUES (#{id},#{subjectname},#{class_id},#{remark},#{state})
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <update id="update" parameterType="com.entity.Subject">
+        UPDATE t_subject SET subjectname=#{subjectname},remark=#{remark},
+        state=#{state} WHERE id=#{id}
+    </update>
+
+    <select id="selectByName" parameterType="String" resultMap="Subject">
+        SELECT * FROM t_subject WHERE subjectname = #{subjectname}
+    </select>
+</mapper>

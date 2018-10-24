@@ -1,7 +1,10 @@
 package com.httptool;
 
+import com.entity.MyObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -9,19 +12,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by huyoucheng on 2018/10/20.
  */
 @Configuration
 @Aspect
-public class ResponseExceptionAspect {
+public class ResponseAspect {
     @Autowired
     HttpServletResponse response;
 
-    static Logger logger = Logger.getLogger(ResponseExceptionAspect.class);
+    static Logger logger = Logger.getLogger(ResponseAspect.class);
 
-    public ResponseExceptionAspect(){}
+    static ObjectMapper mapper = new ObjectMapper();
+
+    public ResponseAspect(){}
 
     @Pointcut("execution(* com.controller..*(..)) ")
     public void response(){}
@@ -39,6 +45,15 @@ public class ResponseExceptionAspect {
             response.getWriter().write(throwable.getMessage());
         }
         return object;
+    }
+
+    @AfterReturning(pointcut = "response()",returning = "bean")
+    public void logResponseReturn(Object bean){
+        try {
+            logger.info(mapper.writeValueAsString(bean));
+        }catch (Exception e){
+            logger.error(e);
+        }
     }
 
 }

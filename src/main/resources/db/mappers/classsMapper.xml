@@ -11,8 +11,8 @@
         <result column="state" property="state" />
     </resultMap>
 
-    <insert id="insertClasss" parameterType="com.entity.Classs" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-        INSERT INTO class (id,grade,classname,master,remark)
+    <insert id="insert" parameterType="com.entity.Classs" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO t_class (id,grade,classname,master,remark)
         VALUES
         (#{id},#{grade},#{classname},#{master},#{remark})
         <selectKey resultType="int" keyProperty="id" order="AFTER">
@@ -20,16 +20,17 @@
         </selectKey>
     </insert>
 
-    <update id="updateClasss" parameterType="com.entity.Classs">
-        UPDATE class SET grade=#{grade},classname=#{classname},master=#{master},remark=#{remark},state=#{state}
+    <update id="update" parameterType="com.entity.Classs">
+        UPDATE t_class SET grade=#{grade},classname=#{classname},master=#{master},remark=#{remark},state=#{state}
+        WHERE id=#{id}
     </update>
 
-    <select id="getClasssByName" parameterType="String" resultMap="Classs">
-        SELECT * FROM class WHERE classname = #{classname}
+    <select id="selectByName" parameterType="String" resultMap="Classs">
+        SELECT * FROM t_class WHERE classname = #{claName}
     </select>
 
     <select id="getAllClasses" resultMap="Classs">
-        SELECT * FROM class
+        SELECT * FROM t_class
     </select>
 
 

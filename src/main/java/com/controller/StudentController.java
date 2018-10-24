@@ -28,12 +28,25 @@ public class StudentController {
         return studentService.insert(student);
     }
 
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    public Student updateStudent(@RequestBody Student student) throws Exception{
+        return studentService.update(student);
+    }
+
     /*
     * 根据学生名查找学生
     * */
     @RequestMapping(value = "/name",method = RequestMethod.GET)
     public List<Student> getStudent(String stuName) throws Exception{
         return studentService.getStudentByStuName(stuName);
+    }
+
+    /*
+    * 根据班级id查找学生
+    * */
+    @RequestMapping(value = "/classid",method = RequestMethod.GET)
+    public List<Student> getStudent(int classsId) throws Exception{
+        return studentService.getStudentByClassId(classsId);
     }
 
 

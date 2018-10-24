@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ExaminationDao">
+    <resultMap id="Examination" type="com.entity.Examination">
+        <id column="id" property="id" />
+        <result column="examserial" property="examserial" />
+        <result column="examname" property="examname" />
+        <result column="remark" property="remark" />
+        <result column="state" property="state" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.entity.Examination" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO t_examination (id,examserial,examname,remark,state)
+        VALUES
+        (#{id},#{examserial},#{examname},#{remark},#{state})
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <update id="update" parameterType="com.entity.Examination">
+        UPDATE t_examination SET examserial=#{examserial},examname=#{examname},
+        master=#{remark},state=#{state}
+        WHERE id=#{id}
+    </update>
+
+    <select id="selectByName" parameterType="String" resultMap="Examination">
+        SELECT * FROM t_examination WHERE examname = #{examname}
+    </select>
+
+    <select id="selectByExamSerial" parameterType="String" resultMap="Examination">
+        SELECT * FROM subject WHERE examserial = #{examserial}
+    </select>
+
+    <select id="selectById" parameterType="long" resultMap="Examination">
+        SELECT * FROM subject WHERE id = #{id}
+    </select>
+</mapper>

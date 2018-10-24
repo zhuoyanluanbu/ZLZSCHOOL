@@ -11,12 +11,14 @@ import java.util.List;
  * Created by huyoucheng on 2018/10/20.
  */
 @Repository
-public interface StudentDao {
+public interface StudentDao extends BaseDao<Student,Long>{
 
     int insert(Student student) throws SQLException;
 
-    List<Student> selectByStuName(String stuName) throws SQLException;
+    List<Student> selectByName(String stuName) throws SQLException;
 
-    Student updateStudent(Student student) throws SQLException;
+    int update(Student student) throws SQLException;
+
+    List<Student> selectByClassId(int classsId) throws SQLException;
 
 }

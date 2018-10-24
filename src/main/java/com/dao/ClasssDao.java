@@ -10,14 +10,16 @@ import java.util.List;
  * Created by huyoucheng on 2018/10/20.
  */
 @Repository
-public interface ClasssDao {
+public interface ClasssDao extends BaseDao<Classs,Long>{
 
-    int insertClasss(Classs classs) throws SQLException;
+    int insert(Classs classs) throws SQLException;
 
-    List<Classs> getClasssByName(String claName) throws SQLException;
+    List<Classs> selectByName(String claName) throws SQLException;
 
     List<Classs> getAllClasses() throws SQLException;
 
-    Classs updateClasss(Classs classs) throws SQLException;
+    int update(Classs classs) throws SQLException;
+
+    Classs selectById(long id) throws SQLException;
 
 }

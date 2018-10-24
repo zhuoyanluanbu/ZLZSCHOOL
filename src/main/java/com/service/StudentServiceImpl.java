@@ -23,7 +23,18 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Student update(Student student) throws SQLException {
+        studentDao.update(student);
+        return student;
+    }
+
+    @Override
     public List<Student> getStudentByStuName(String stuName) throws SQLException {
-        return studentDao.selectByStuName(stuName);
+        return studentDao.selectByName(stuName);
+    }
+
+    @Override
+    public List<Student> getStudentByClassId(int classsId) throws SQLException {
+        return studentDao.selectByClassId(classsId);
     }
 }

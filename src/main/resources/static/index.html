@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body,html{
+            padding: 0;
+        }
+        tr,td{
+            margin: 0;
+        }
+        .pageTitle{
+            text-align: center;
+            width: 100%
+        }
+        .classDataBody{
+            width: 100%;
+        }
+        .classDataBody table{
+            width: 100%;
+            border-collapse:collapse;
+            border:none;
+        }
+        thead{
+            background-color: lightgray;
+        }
+        td{
+            text-align: center;
+            border: 1px gray solid;
+            font-size: 0.6em;
+        }
+        .addClass{
+            width: 50%;
+            height: 2em;
+            border-radius: 1em;
+            background-color: orange;
+            margin: 1em 25%;
+            font-size: 0.6em;
+            text-align: center;
+            color: ghostwhite;
+            border: none;
+        }
+        .modalMask{
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        .addModal{
+            width: 90%;
+            height: 19em;
+            background-color: white;
+            border-radius: 1em;
+            position: absolute;
+            top: 25%;
+            left: 5%;
+            margin: auto;
+            text-align: center;
+        }
+        .addModal input{
+            width: 80%;
+            height: 2em;
+            border-radius: 1em;
+            margin: 2em auto 0 auto;
+            border: 1px solid lightgray;
+            text-align: center;
+        }
+        .addModal button{
+            margin: 2em auto 0 auto;
+            width: 70%;
+            height: 2.4em;
+            text-align: center;
+            border: none;
+            border-radius: 1.2em;
+            background-color: forestgreen;
+            color: white;
+        }
+        .addModal .addCancel{
+            margin-top:0.7em;
+            background-color: darksalmon;
+        }
+    </style>
+</head>
+<body>
+    <h3 class="pageTitle">我的班级</h3>
+    <div class="classDataBody">
+        <table>
+            <thead>
+                <tr>
+                    <td>年级</td>
+                    <td>班级</td>
+                    <td>主管</td>
+                    <td>备注</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody class="data">
+            </tbody>
+        </table>
+    </div>
+    <button class="addClass">
+        新增
+    </button>
+    <div class="modalMask">
+        <div class="addModal">
+            <input class="grade" type="number" placeholder="年级,比如2018级"/>
+            <input class="classname" type="text" placeholder="班级名,比如北汽银翔班"/>
+            <input class="remark" type="text" placeholder="备注"/>
+            <button class="addConfirm">确定</button>
+            <button class="addCancel">取消</button>
+        </div>
+    </div>
+
+
+    <script type="application/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="application/javascript">
+
+        /*
+        * 获取所有班级
+        * */
+        var getAllClasses = function(){
+            alert('a');
+            $.ajax({
+                url:'/class/all',
+                success:function(data){
+                    if(data.length > 0){
+                        console.log(0)
+                        var inner = ''
+                        for (var c in data){
+                            inner += '<tr>' +
+                                        '<td>'+data[c].grade+'</td>' +
+                                        '<td>'+data[c].classname+'</td>' +
+                                        '<td>'+data[c].master+'</td>' +
+                                        '<td>'+data[c].remark+'</td>' +
+                                        '<td><a href="">进入</a></td>' +
+                                    '</tr>'
+                        }
+                        $(".classDataBody .data").html(inner)
+                    }else{
+                        console.log(1)
+                        $(".classDataBody").hidden = true
+                    }
+                    console.log(data);
+                },error:function(err){
+                    alert('['+err.status+']\n'+err.responseText);
+                }
+            })
+        }()
+
+        /*
+        * 新增一个班级
+        * */
+        var addClass = function(grade,classname,remark){
+            var dataReq = {grade:grade,classname:classname,master:'Zhaolingzhi',remark:remark};
+            $.ajax({
+                url:'/class/insert',
+                type:'post',
+                data:JSON.stringify(dataReq),
+                dataType:'josn',
+                contentType:'application/json;charset=utf-8',
+                success:function(data){
+                    alert(JSON.stringify(data))
+                    if (data){
+                        alert('添加成功')
+                        displayModal(false)
+                        getAllClasses()
+                    }
+                },error:function(err){
+//                    alert('['+err.status+']\n'+err.responseText)
+                }
+            })
+        }
+
+        /*
+        * 点击新增按钮
+        * */
+        $('.addClass').click(function(){
+            displayModal(true)
+        })
+
+        /*
+        * 模态的确认按钮
+        * */
+        $('.addConfirm').click(function(){
+            var grade = $('.grade').val();
+            if(!grade || grade=='') {
+                alert('请填写年级');
+                return;
+            }
+            var classname = $('.classname').val();
+            if(!classname || classname=='') {
+                alert('请填写班级名');
+                return;
+            }
+            var remark = $('.remark').val()?$('.remark').val():null;
+            addClass(grade,classname,remark);
+        })
+        /*
+         * 模态的取消按钮
+         * */
+        $('.addCancel').click(function(){
+            displayModal(false);
+        })
+
+        /*
+        * 模态显示或者隐藏
+        * */
+        var displayModal = function(isDisplay){
+            if(!isDisplay){
+                $('.addModal input').val('');
+                $('.modalMask').css('display','none');
+            }else{
+                $('.modalMask').css('display','block');
+            }
+        }
+    </script>
+</body>
+</html>

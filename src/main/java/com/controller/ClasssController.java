@@ -20,24 +20,37 @@ public class ClasssController {
     @Autowired
     ClasssService classsService;
 
+    /*
+    * 增加一个班级
+    * */
     @RequestMapping(value = "/insert",method = RequestMethod.POST)
     public Classs insert(@RequestBody Classs classs) throws Exception{
         return classsService.insertClasss(classs);
     }
 
+    /*
+    * 更改班级信息
+    * */
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public Classs update(@RequestBody Classs classs) throws Exception{
         return classsService.updateClasss(classs);
     }
 
+    /*
+    * 根据班级名字查找班级
+    * */
     @RequestMapping(value = "/name",method = RequestMethod.GET)
     public List<Classs> getClass(String claName) throws Exception{
         return classsService.getClasssByName(claName);
     }
 
+    /*
+    * 获取所有班级
+    * */
     @RequestMapping(value = "/all",method = RequestMethod.GET)
     public List<Classs> getAllClass() throws Exception{
         return classsService.getAllClasses();
+//        throw new Exception("ccc");
     }
 
 }

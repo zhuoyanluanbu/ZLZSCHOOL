@@ -35,7 +35,7 @@
     <insert id="insert" parameterType="com.entity.Student" useGeneratedKeys="true"
             keyColumn="id"
             keyProperty="id">
-      INSERT INTO student (id,studentnum,studentname,sex,birthday,politicalstatus,educationallevel,idnumber,phone,
+      INSERT INTO t_student (id,studentnum,studentname,sex,birthday,politicalstatus,educationallevel,idnumber,phone,
       homeaddress,qqnumber,wechatnumber,issmoke,smokeage,whysmoke,islove,whylove,loverinformation,isviolence,whyviolence,
       medicalhistory,lifeexpenses,homeincome,hobby,performance,remark,state)
       VALUES
@@ -47,12 +47,8 @@
         </selectKey>
     </insert>
 
-    <select id="selectByStuName" parameterType="String" resultMap="Student">
-      SELECT * FROM student WHERE studentname = #{stuName}
-    </select>
-
-    <update id="updateStudent" parameterType="com.entity.Student">
-      UPDATE student SET studentnum=#{studentnum},studentname=#{studentName},sex=#{sex},birthday=#{birthday},
+    <update id="update" parameterType="com.entity.Student">
+      UPDATE t_student SET studentnum=#{studentnum},studentname=#{studentName},sex=#{sex},birthday=#{birthday},
       politicalstatus=#{politicalstatus},educationallevel=#{educationallevel},idnumber=#{idnumber},phone=#{phone},
       homeaddress=#{homeaddress},qqnumber=#{qqnumber},wechatnumber=#{wechatnumber},issmoke=#{issmoke},smokeage=#{smokeage},
       whysmoke=#{whysmoke},islove=#{islove},whylove=#{whylove},loverinformation=#{loverinformation},isviolence=#{isviolence},
@@ -60,4 +56,14 @@
       hobby=#{hobby},performance=#{performance},remark=#{remark},state=#{state}
       WHERE id=#{id}
     </update>
+
+    <select id="selectByName" parameterType="String" resultMap="Student">
+        SELECT * FROM t_student WHERE studentname = #{stuName}
+    </select>
+
+    <select id="selectByClassId" parameterType="int" resultMap="Student">
+      SELECT t_student.* from t_student left JOIN t_stu_class
+      on t_student.id = t_stu_class.student_id
+      WHERE t_stu_class.class_id=#{classsId}
+    </select>
 </mapper>

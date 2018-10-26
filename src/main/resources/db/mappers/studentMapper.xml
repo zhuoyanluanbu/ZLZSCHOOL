@@ -61,6 +61,10 @@
         SELECT * FROM t_student WHERE studentname = #{stuName}
     </select>
 
+    <select id="selectById" parameterType="long" resultMap="Student">
+        SELECT * FROM t_student WHERE id = #{id}
+    </select>
+
     <select id="selectByClassId" parameterType="int" resultMap="Student">
       SELECT t_student.* from t_student left JOIN t_stu_class
       on t_student.id = t_stu_class.student_id

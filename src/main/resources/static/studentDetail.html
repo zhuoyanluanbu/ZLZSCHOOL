@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <style>
+        .pageTitle{
+            text-align: center;
+            width: 100%;
+        }
+        .personalBaseMessage{
+            width: 90%;
+            margin: auto;
+            text-align: center;
+            background-color: khaki;
+            border-radius: 1em;
+            padding-top: 1em;
+            padding-bottom: 1em;
+        }
+        .editBtn{
+            position: absolute;
+            height: 1em;
+            width: 1em;
+            right: 11%;
+        }
+        .editBtn img{
+            width: 1em;
+        }
+        .personalBaseMessage .title{
+            font-size: 0.9em;
+            color: orange;
+            margin-bottom: 0.45em;
+        }
+        .personalBaseMessage p{
+            width: 90%;
+            margin: 0em auto;
+            text-align: left;
+        }
+        .personalBaseMessage span:first-child{
+            margin-right: 0.1em;
+        }
+        .personalBaseMessage span{
+            font-size: 0.8em;
+        }
+        .pullPushPersonalBaseMessageBtn{
+            margin: 0.5em auto;
+            width: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h3 class="pageTitle"></h3>
+
+    <div class="personalBaseMessage" state="spread">
+        <div class="editBtn"><img src="img/edit.png"/></div>
+        <p class="title">
+            个人基本信息
+        </p>
+        <p>
+            <span>姓名：</span>
+            <span class="stuName">xxx</span>
+        </p>
+        <p>
+            <span>性别：</span>
+            <span class="stuSex">xx男x</span>
+        </p>
+        <p>
+            <span>出生年月：</span>
+            <span class="stuBirthday">2002/09/10</span>
+        </p>
+        <p>
+            <span>身份证号：</span>
+            <span class="stuIdNumber">2002/09/10</span>
+        </p>
+        <p>
+            <span>电话号码：</span>
+            <span class="phone">13200988767</span>
+        </p>
+        <p>
+            <span>家庭地址：</span>
+            <span class="homeAddress">四川省 泸州市 合江县 五通镇</span>
+        </p>
+        <p>
+            <span>QQ号：</span>
+            <span class="QQ">2650320028</span>
+        </p>
+        <p>
+            <span>微信号：</span>
+            <span class="wechat">WX129087656</span>
+        </p>
+        <p>
+            <span>是否抽烟：</span>
+            <span class="isSmoke">否</span>
+        </p>
+        <p>
+            <span>烟龄：</span>
+            <span class="smokeAge">0</span>
+        </p>
+        <p>
+            <span>原因:</span>
+            <span class="whySmoke">不想抽烟</span>
+        </p>
+        <p>
+            <span>是否抽烟：</span>
+            <span class="isSmoke">否</span>
+        </p>
+        <p>
+            <span>是否恋爱：</span>
+            <span class="isLove">否</span>
+        </p>
+        <p>
+            <span>原因：</span>
+            <span class="whyLove">没人爱</span>
+        </p>
+        <p>
+            <span>对象：</span>
+            <span class="lover">木有</span>
+        </p>
+        <p>
+            <span>暴力倾向：</span>
+            <span class="isViolence">否</span>
+        </p>
+        <p>
+            <span>原因：</span>
+            <span class="whyViolence">没有就没有</span>
+        </p>
+        <p>
+            <span>既往病史：</span>
+            <span class="medicalhistory">无（初中 鼻炎手术）</span>
+        </p>
+        <p>
+            <span>生活开销：</span>
+            <span class="lifeexpenses">200-300</span>
+        </p>
+        <p>
+            <span>家庭收入：</span>
+            <span class="homeincome"></span>
+        </p>
+        <p>
+            <span>兴趣爱好：</span>
+            <span class="hobby">打游戏</span>
+        </p>
+        <p>
+            <span>活动参与情况与在校表现：</span>
+            <span class="performance">无表现</span>
+        </p>
+        <p>
+            <span>备注：</span>
+            <span class="remark"></span>
+        </p>
+    </div>
+    <div class="pullPushPersonalBaseMessageBtn">
+        <img src="img/pushPBM.png" width="30px" height="30px" /></div>
+    <div class="editPersonalBaseMessage"></div>
+    <script type="application/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="application/javascript" src="js/common.js"></script>
+    <script>
+        var getStuDetail = function(){
+            $.ajax({
+                url:'/student/stuid?stuId='+getRequestParam()['stuid'],
+                success:function(stu){
+                    alert(JSON.stringify(stu))
+                    console.log(stu)
+                    $('.pageTitle').html(stu.studentName + '的详情')
+                },
+                error:function(err){
+                    dealHttpErr(err)
+                }
+            })
+        }()
+
+        var personalBaseMessageDivSpreadHeight = $('.personalBaseMessage').css('height')
+        var personalBaseMessageDivShrinkHeight = '1.33em'
+        $('.pullPushPersonalBaseMessageBtn').click(function(){
+            var state = $('.personalBaseMessage').attr('state')
+            if (state === 'spread'){
+                $('.personalBaseMessage').attr('state','shrink')
+                $('.personalBaseMessage').animate({height:personalBaseMessageDivShrinkHeight},'fast')
+                $('.pullPushPersonalBaseMessageBtn img').attr('src','img/pullPBM.png')
+                $('.personalBaseMessage p:not(:first)').css('display','none')
+            }else{
+                $('.personalBaseMessage').attr('state','spread')
+                $('.personalBaseMessage').animate({height:personalBaseMessageDivSpreadHeight},'fast')
+                $('.pullPushPersonalBaseMessageBtn img').attr('src','img/pushPBM.png')
+                $('.personalBaseMessage p:not(:first)').css('display','block')
+            }
+        })
+
+        /*
+        * 跳转到编辑
+        * */
+        $('.personalBaseMessage .editBtn').click(function(){
+            location.href = '/studentEdit.html?stuid='+getRequestParam()['stuid']
+        })
+
+    </script>
+</body>
+</html>

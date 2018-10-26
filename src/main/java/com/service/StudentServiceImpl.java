@@ -37,4 +37,9 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> getStudentByClassId(int classsId) throws SQLException {
         return studentDao.selectByClassId(classsId);
     }
+
+    @Override
+    public Student getStudentById(long id) throws SQLException {
+        return studentDao.selectById(id);
+    }
 }

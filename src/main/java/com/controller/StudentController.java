@@ -34,6 +34,14 @@ public class StudentController {
     }
 
     /*
+    * 根据学生id查找学生
+    * */
+    @RequestMapping(value = "/stuid",method = RequestMethod.GET)
+    public Student getStudentById(int stuId) throws Exception{
+        return studentService.getStudentById(stuId);
+    }
+
+    /*
     * 根据学生名查找学生
     * */
     @RequestMapping(value = "/name",method = RequestMethod.GET)

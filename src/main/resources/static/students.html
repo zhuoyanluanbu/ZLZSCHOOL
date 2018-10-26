@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>哇，我的猴儿们</title>
+    <style>
+        body,html{
+            padding: 0;
+        }
+        tr,td{
+            margin: 0;
+        }
+        .pageTitle{
+            text-align: center;
+            width: 100%
+        }
+        .studentDataBody{
+            width: 100%;
+        }
+        .studentDataBody table{
+            width: 100%;
+            border-collapse:collapse;
+            border:none;
+        }
+        thead{
+            background-color: lightgray;
+        }
+        td{
+            text-align: center;
+            border: 1px gray solid;
+            font-size: 0.6em;
+        }
+        td a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h3 class="pageTitle"></h3>
+    <div class="studentDataBody">
+        <table>
+            <thead>
+                <tr>
+                    <td>年级</td>
+                    <td>班级</td>
+                    <td>学生名</td>
+                    <td>性别</td>
+                </tr>
+            </thead>
+            <tbody class="data">
+            </tbody>
+        </table>
+    </div>
+    <script type="application/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="application/javascript" src="js/common.js"></script>
+    <script type="application/javascript">
+        var displayStudents = function(){
+            var params = getRequestParam();
+            var classId = params['classId'];
+            var classname = decodeURI(params['className']);
+            var classGrade = params['grade'];
+            $('.pageTitle').html(classname);
+            $.ajax({
+                url:'/student/classid?classsId='+classId,
+                success:function(stus){
+                    if(stus.length > 0){
+                        var inner = ''
+                        for (var c in stus){
+                            inner += '<tr>' +
+                                        '<td>'+classGrade+'</td>' +
+                                        '<td>'+classname+'</td>' +
+                                        '<td><a href="/studentDetail.html?stuid='+stus[c].id+'">'+
+                                            stus[c].studentName
+                                            +'</a></td>' +
+                                        '<td>'+(stus[c].sex==0?"女":"男")+'</td>'
+                                    '</tr>'
+                        }
+                        $(".studentDataBody .data").html(inner)
+                    }else{
+                        $(".studentDataBody").hidden = true
+                    }
+                    console.log(stus);
+                },
+                error:function(err){
+                    dealHttpErr(err)
+                }
+            })
+        }()
+    </script>
+</body>
+</html>

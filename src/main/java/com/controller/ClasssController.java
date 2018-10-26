@@ -40,7 +40,7 @@ public class ClasssController {
     * 根据班级名字查找班级
     * */
     @RequestMapping(value = "/name",method = RequestMethod.GET)
-    public List<Classs> getClass(String claName) throws Exception{
+    public List<Classs> getClassByName(String claName) throws Exception{
         return classsService.getClasssByName(claName);
     }
 

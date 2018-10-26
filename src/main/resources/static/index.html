@@ -120,13 +120,13 @@
 
 
     <script type="application/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="application/javascript" src="js/common.js"></script>
     <script type="application/javascript">
 
         /*
         * 获取所有班级
         * */
         var getAllClasses = function(){
-            alert('a');
             $.ajax({
                 url:'/class/all',
                 success:function(data){
@@ -134,25 +134,26 @@
                         console.log(0)
                         var inner = ''
                         for (var c in data){
+                            var remarknull = '';
                             inner += '<tr>' +
                                         '<td>'+data[c].grade+'</td>' +
                                         '<td>'+data[c].classname+'</td>' +
                                         '<td>'+data[c].master+'</td>' +
-                                        '<td>'+data[c].remark+'</td>' +
+                                        '<td>'+(data[c].remark==null?remarknull:data[c].remark)+'</td>' +
                                         '<td><a href="">进入</a></td>' +
                                     '</tr>'
                         }
                         $(".classDataBody .data").html(inner)
                     }else{
-                        console.log(1)
                         $(".classDataBody").hidden = true
                     }
                     console.log(data);
                 },error:function(err){
-                    alert('['+err.status+']\n'+err.responseText);
+                    dealHttpErr(err)
                 }
             })
-        }()
+        }
+        getAllClasses();
 
         /*
         * 新增一个班级
@@ -163,17 +164,16 @@
                 url:'/class/insert',
                 type:'post',
                 data:JSON.stringify(dataReq),
-                dataType:'josn',
+                dataType:'json',
                 contentType:'application/json;charset=utf-8',
                 success:function(data){
-                    alert(JSON.stringify(data))
                     if (data){
                         alert('添加成功')
                         displayModal(false)
                         getAllClasses()
                     }
                 },error:function(err){
-//                    alert('['+err.status+']\n'+err.responseText)
+                    dealHttpErr(err)
                 }
             })
         }

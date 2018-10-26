@@ -19,4 +19,6 @@ public interface StudentService {
     List<Student> getStudentByStuName(String stuName) throws SQLException;
 
     List<Student> getStudentByClassId(int classsId) throws SQLException;
+
+    Student getStudentById(long id) throws SQLException;
 }

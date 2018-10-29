@@ -18,12 +18,12 @@ public class Student extends MyObject {
     private String qqnumber;
     private String wechatnumber;
     private int issmoke = -1;
-    private int smokeage;
+    private int smokeage = 0;
     private String whysmoke;
     private int islove = -1;
     private String whylove;
     private String loverinformation;//恋爱对象信息
-    private int isviolence;
+    private int isviolence = -1;
     private String whyviolence;
     private String medicalhistory;//病史
     private String lifeexpenses;//生活开销

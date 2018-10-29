@@ -1,6 +1,5 @@
 package com.httptool;
 
-import com.entity.MyObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * Created by huyoucheng on 2018/10/20.

@@ -21,6 +21,14 @@
             <input name="birthday" type="date" />
         </p>
         <p>
+            <span>层次：</span>
+            <input name="educationallevel" type="text" />
+        </p>
+        <p>
+            <span>政治面貌：</span>
+            <input name="politicalstatus" type="text" />
+        </p>
+        <p>
             <span>身份证号码：</span>
             <input name="idnumber" type="number" />
         </p>
@@ -45,6 +53,10 @@
             <label><input name="isSmoke" type="radio" value="-1" checked="checked"/>未知</label>
             <label><input name="isSmoke" type="radio" value="0"/>否</label>
             <label><input name="isSmoke" type="radio" value="1"/>是</label>
+        </p>
+        <p>
+            <span>烟龄：</span>
+            <input name="smokeAge" type="number" />
         </p>
         <p>
             <span>原因：</span>
@@ -91,7 +103,7 @@
         </p>
         <p>
             <span>活动参与情况与在校表现：</span>
-            <textarea name="performance">
+            <textarea class="performance">
             </textarea>
         </p>
         <p>
@@ -99,9 +111,109 @@
             <input name="remark" type="text" />
         </p>
     </div>
+    <button class="confirmBtn">确定</button>
+    <button class="cancelBtn">取消</button>
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/common.js"></script>
     <script>
+
+        var stuid = getRequestParam()['stuid'];
+        var type = getRequestParam()['type']//0新增，1修改
+
+
+        var initStudent = function(){
+            if (!stuid) {//新增
+                type = 0;
+            }else{//修改
+                type = 1;
+                httpGet('/student/stuid?stuId='+stuid).then(function(stu){
+                    $('input[name="name"]').val(stu.studentName);
+                    $('input[name="sex"][type="radio"][value='+stu.sex+']').attr('checked','checked');
+                    $('input[name="birthday"]').val((stu.birthday||'').replace(/\//g,'-'));
+                    $('input[name="educationallevel"]').val(stu.educationallevel||'');
+                    $('input[name="politicalstatus"]').val(stu.politicalstatus||'');
+                    $('input[name="idnumber"]').val(stu.idnumber||'');
+                    $('input[name="phone"]').val(stu.phone||'');
+                    $('input[name="address"]').val(stu.homeaddress||'');
+                    $('input[name="QQ"]').val(stu.qqnumber||'');
+                    $('input[name="wechat"]').val(stu.wechatnumber||'');
+                    $('input[name="isSmoke"][type="radio"][value='+stu.issmoke+']').attr('checked','checked');
+                    $('input[name="whySmoke"]').val(stu.whysmoke||'');
+                    $('input[name="isLove"][type="radio"][value='+stu.islove+']').attr('checked','checked');
+                    $('input[name="lover"]').val(stu.loverinformation||'');
+                    $('input[name="whyLove"]').val(stu.whylove||'');
+                    $('input[name="isViolence"][type="radio"][value='+stu.isviolence+']').attr('checked','checked');
+                    $('input[name="whyViolence"]').val(stu.whyviolence||'');
+                    $('input[name="medicalhistory"]').val(stu.medicalhistory||'');
+                    $('input[name="lifeexpenses"]').val(stu.lifeexpenses||'');
+                    $('input[name="homeincome"]').val(stu.homeincome||'');
+                    $('input[name="hobby"]').val(stu.hobby||'');
+                    $('.performance').val(stu.performance||'');
+                    $('input[name="remark"]').val(stu.remark||'');
+                }).catch(function(err){
+                    dealHttpErr(err)
+                })
+            }
+        }()
+
+        var getStudent = function(){
+            var stuName = $('input[name="name"]').val();
+            var sex = $('input[name="sex"][type="radio"]:checked').val();
+            var birthday = $('input[name="birthday"]').val();
+            var educationallevel = $('input[name="educationallevel"]').val();
+            var politicalstatus = $('input[name="politicalstatus"]').val();
+            var idnumber = $('input[name="idnumber"]').val();
+            var phone = $('input[name="phone"]').val();
+            var address = $('input[name="address"]').val();
+            var QQ = $('input[name="QQ"]').val();
+            var wechat = $('input[name="wechat"]').val();
+            var isSmoke = $('input[name="isSmoke"][type="radio"]:checked').val();
+            var smokeAge = $('input[name="smokeAge"]').val();
+            var whySmoke = $('input[name="whySmoke"]').val();
+            var isLove = $('input[name="isLove"][type="radio"]:checked').val();
+            var lover = $('input[name="lover"]').val();
+            var whyLove = $('input[name="whyLove"]').val();
+            var isViolence = $('input[name="isViolence"][type="radio"]:checked').val();
+            var whyViolence = $('input[name="whyViolence"]').val();
+            var medicalhistory = $('input[name="medicalhistory"]').val();
+            var lifeexpenses = $('input[name="lifeexpenses"]').val();
+            var homeincome = $('input[name="homeincome"]').val();
+            var hobby = $('input[name="hobby"]').val();
+            var performance = $('.performance').val();
+            var remark = $('input[name="remark"]').val();
+            var student = new Student(stuid,null,stuName,birthday,politicalstatus,educationallevel,
+                    idnumber,phone,address, QQ,wechat,smokeAge,whySmoke,whyLove,lover,isViolence,whyViolence,
+                    medicalhistory,lifeexpenses, homeincome,hobby,performance,null,sex,isSmoke,isLove,remark);
+            return student;
+        }
+
+        /*
+        * 请求数据
+        * */
+        var postData = function(){
+            var url = '';
+            if (type == 0){
+                url = '/studet/insert';
+            }else if(type == 1){
+                url = '/student/update';
+            }else{
+                alert('操作错误');
+                return;
+            }
+            httpPost(url,getStudent())
+                    .then(function(data){
+                        alert(type==0?'增加成功':'修改成功')
+                        history.go(-1);
+                    })
+                    .catch(function(err){dealHttpErr(err)})
+        }
+
+        $(".confirmBtn").click(function(){
+            postData()
+        })
+        $(".cancelBtn").click(function(){
+            history.go(-1);
+        })
 
     </script>
 </body>

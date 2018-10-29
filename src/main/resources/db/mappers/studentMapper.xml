@@ -52,7 +52,7 @@
       politicalstatus=#{politicalstatus},educationallevel=#{educationallevel},idnumber=#{idnumber},phone=#{phone},
       homeaddress=#{homeaddress},qqnumber=#{qqnumber},wechatnumber=#{wechatnumber},issmoke=#{issmoke},smokeage=#{smokeage},
       whysmoke=#{whysmoke},islove=#{islove},whylove=#{whylove},loverinformation=#{loverinformation},isviolence=#{isviolence},
-      whyviolence=#{whyviolence},medicalhistory=#{medicalhistory},lifeexpenses=#{lifeexpenses},#{homeincome},
+      whyviolence=#{whyviolence},medicalhistory=#{medicalhistory},lifeexpenses=#{lifeexpenses},homeincome=#{homeincome},
       hobby=#{hobby},performance=#{performance},remark=#{remark},state=#{state}
       WHERE id=#{id}
     </update>

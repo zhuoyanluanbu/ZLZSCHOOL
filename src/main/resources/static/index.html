@@ -140,7 +140,9 @@
                                         '<td>'+data[c].classname+'</td>' +
                                         '<td>'+data[c].master+'</td>' +
                                         '<td>'+(data[c].remark==null?remarknull:data[c].remark)+'</td>' +
-                                        '<td><a href="">进入</a></td>' +
+                                        '<td>' +
+                                            '<a href="/students.html?classId='+data[c].id+'&className='+data[c].classname+'&grade='+data[c].grade+'">进入</a>' +
+                                        '</td>' +
                                     '</tr>'
                         }
                         $(".classDataBody .data").html(inner)

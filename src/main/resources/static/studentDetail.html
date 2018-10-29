@@ -73,6 +73,14 @@
             <span class="stuBirthday">2002/09/10</span>
         </p>
         <p>
+            <span>层次：</span>
+            <span class="stuEducationallevel">2002/09/10</span>
+        </p>
+        <p>
+            <span>政治面貌：</span>
+            <span class="stuPoliticalstatus">2002/09/10</span>
+        </p>
+        <p>
             <span>身份证号：</span>
             <span class="stuIdNumber">2002/09/10</span>
         </p>
@@ -103,10 +111,6 @@
         <p>
             <span>原因:</span>
             <span class="whySmoke">不想抽烟</span>
-        </p>
-        <p>
-            <span>是否抽烟：</span>
-            <span class="isSmoke">否</span>
         </p>
         <p>
             <span>是否恋爱：</span>
@@ -160,17 +164,36 @@
     <script type="application/javascript" src="js/common.js"></script>
     <script>
         var getStuDetail = function(){
-            $.ajax({
-                url:'/student/stuid?stuId='+getRequestParam()['stuid'],
-                success:function(stu){
-                    alert(JSON.stringify(stu))
-                    console.log(stu)
-                    $('.pageTitle').html(stu.studentName + '的详情')
-                },
-                error:function(err){
-                    dealHttpErr(err)
-                }
-            })
+            httpGet('/student/stuid?stuId='+getRequestParam()['stuid'])
+                    .then(function(stu){
+                        $('title').html(stu.studentName)
+                        $('.pageTitle').html(stu.studentName)
+                        $('.stuName').html(stu.studentName)
+                        $('.stuSex').html(stu.sex==0?'女':'男')
+                        $('.stuBirthday').html(stu.birthday)
+                        $('.stuEducationallevel').html(stu.educationallevel)
+                        $('.stuPoliticalstatus').html(stu.politicalstatus)
+                        $('.stuIdNumber').html(stu.idnumber)
+                        $('.phone').html(stu.phone)
+                        $('.homeAddress').html(stu.homeaddress)
+                        $('.QQ').html(stu.qqnumber)
+                        $('.wechat').html(stu.wechatnumber)
+                        $('.isSmoke').html(stu.issmoke==-1?'未知':(stu.issmoke==0?'否':'是'))
+                        $('.smokeAge').html(stu.smokeage)
+                        $('.whySmoke').html(stu.whysmoke)
+                        $('.isLove').html(stu.islove==-1?'未知':(stu.islove==0?'否':'是'))
+                        $('.whyLove').html(stu.whylove)
+                        $('.lover').html(stu.loverinformation)
+                        $('.isViolence').html(stu.isviolence==-1?'未知':(stu.isviolence==0?'否':'是'))
+                        $('.whyViolence').html(stu.whyviolence)
+                        $('.medicalhistory').html(stu.medicalhistory)
+                        $('.lifeexpenses').html(stu.lifeexpenses)
+                        $('.homeincome').html(stu.homeincome)
+                        $('.hobby').html(stu.hobby)
+                        $('.performance').html(stu.performance)
+                        $('.remark').html(stu.remark)
+                    })
+                    .catch(function(err){dealHttpErr(err)})
         }()
 
         var personalBaseMessageDivSpreadHeight = $('.personalBaseMessage').css('height')

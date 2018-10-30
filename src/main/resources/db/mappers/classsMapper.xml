@@ -33,5 +33,9 @@
         SELECT * FROM t_class
     </select>
 
+    <update id="delete" parameterType="int">
+        UPDATE t_class SET state WHERE id = #{id}
+    </update>
+
 
 </mapper>

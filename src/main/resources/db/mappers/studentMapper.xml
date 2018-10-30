@@ -70,4 +70,8 @@
       on t_student.id = t_stu_class.student_id
       WHERE t_stu_class.class_id=#{classsId}
     </select>
+
+    <update id="delete" parameterType="int">
+        UPDATE t_student SET state WHERE id = #{id}
+    </update>
 </mapper>

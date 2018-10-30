@@ -30,20 +30,20 @@ public class ResponseAspect {
     @Pointcut("execution(* com.controller..*(..)) ")
     public void response(){}
 
-    @Around("response()")
-    public Object runControllerMethod(ProceedingJoinPoint joinPoint) throws Exception{
-        Object object = null;
-        try {
-            object = joinPoint.proceed();
-        } catch (Throwable throwable) {
-            logger.error(throwable);
-            response.setStatus(606);
-            response.setContentType("application/json");
-            response.setCharacterEncoding("utf-8");
-            response.getWriter().write(throwable.getMessage());
-        }
-        return object;
-    }
+//    @Around("response()")
+//    public Object runControllerMethod(ProceedingJoinPoint joinPoint) throws Exception{
+//        Object object = null;
+//        try {
+//            object = joinPoint.proceed();
+//        } catch (Throwable throwable) {
+//            logger.error(throwable);
+//            response.setStatus(606);
+//            response.setContentType("application/json");
+//            response.setCharacterEncoding("utf-8");
+//            response.getWriter().write(throwable.getMessage());
+//        }
+//        return object;
+//    }
 
     @AfterReturning(pointcut = "response()",returning = "bean")
     public void logResponseReturn(Object bean){

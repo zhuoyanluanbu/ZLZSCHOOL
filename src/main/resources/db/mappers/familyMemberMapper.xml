@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.FamilyMemberDao">
+    <resultMap id="FamilyMember" type="com.entity.FamilyMember">
+        <id column="id" property="id" />
+        <result column="relationship" property="relationship" />
+        <result column="name" property="name" />
+        <result column="workunit" property="workunit" />
+        <result column="phone" property="phone" />
+        <result column="remark" property="remark" />
+        <result column="stu_id" property="stu_id" />
+        <result column="state" property="state" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,
+        relationship,
+        name,
+        workunit,
+        phone,
+        remark,
+        state,
+        stu_id
+    </sql>
+    <sql id="table_name">
+        t_stu_families
+    </sql>
+
+    <insert id="insert" parameterType="com.entity.FamilyMember" useGeneratedKeys="true"
+            keyColumn="id"
+            keyProperty="id">
+        INSERT INTO <include refid="table_name" /> (<include refid="Base_Column_List"/>)
+        VALUES (#{id},#{time},#{sanctionrank},#{sanctionname},#{level},#{other},#{remark},
+        #{state},#{stu_id})
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <update id="update" parameterType="com.entity.FamilyMember">
+        UPDATE <include refid="table_name" />
+        <set>
+            <if test="relationship != null">
+                relationship = #{relationship}
+            </if>
+            <if test="name != null">
+                name = #{name}
+            </if>
+            <if test="workunit != null">
+                workunit = #{workunit}
+            </if>
+            <if test="phone != null">
+                phone = #{phone}
+            </if>
+            <if test="remark != null">
+                remark = #{remark}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <update id="delete" parameterType="int">
+        UPDATE <include refid="table_name" /> SET state=1 WHERE id = #{id}
+    </update>
+
+    <select id="queryAllSanctions" parameterType="int" resultMap="FamilyMember">
+        SELECT * FROM <include refid="table_name" /> WHERE stu_id = #{stu_id}
+    </select>
+
+
+
+</mapper>

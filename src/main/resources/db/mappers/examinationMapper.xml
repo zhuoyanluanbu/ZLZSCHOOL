@@ -30,10 +30,14 @@
     </select>
 
     <select id="selectByExamSerial" parameterType="String" resultMap="Examination">
-        SELECT * FROM subject WHERE examserial = #{examserial}
+        SELECT * FROM t_examination WHERE examserial = #{examserial}
     </select>
 
     <select id="selectById" parameterType="long" resultMap="Examination">
-        SELECT * FROM subject WHERE id = #{id}
+        SELECT * FROM t_examination WHERE id = #{id}
     </select>
+
+    <update id="delete" parameterType="int">
+        UPDATE t_examination SET state WHERE id = #{id}
+    </update>
 </mapper>

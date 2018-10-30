@@ -1,5 +1,8 @@
 package com.controller;
 
+import com.entity.FamilyMember;
+import com.entity.PersonalPlan;
+import com.entity.Sanction;
 import com.entity.Student;
 import com.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,5 +60,28 @@ public class StudentController {
         return studentService.getStudentByClassId(classsId);
     }
 
+    //增加一个学生的奖罚记录
+    @RequestMapping(value = "/sanction",method = RequestMethod.POST)
+    public Sanction addSanctions(@RequestBody Sanction sanction) throws Exception{
+        return studentService.insertSanction(sanction);
+    }
+
+    //查找学生的奖罚记录
+    @RequestMapping(value = "/sanction",method = RequestMethod.GET)
+    public List<Sanction> getAllSanctions(int stuId) throws Exception{
+        return studentService.getAllSanctions(stuId);
+    }
+
+    //查找学生的奖罚记录
+    @RequestMapping(value = "/personalplan",method = RequestMethod.GET)
+    public List<PersonalPlan> getPersonalAllPlans(int stuId) throws Exception{
+        return studentService.getAllPersonalPlans(stuId);
+    }
+
+    //查找学生的家庭成员
+    @RequestMapping(value = "/families",method = RequestMethod.GET)
+    public List<FamilyMember> getFamilies(int stuId) throws Exception{
+        return studentService.getAllFamilyMembers(stuId);
+    }
 
 }

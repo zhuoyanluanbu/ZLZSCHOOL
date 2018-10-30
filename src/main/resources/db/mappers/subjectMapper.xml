@@ -27,4 +27,8 @@
     <select id="selectByName" parameterType="String" resultMap="Subject">
         SELECT * FROM t_subject WHERE subjectname = #{subjectname}
     </select>
+
+    <update id="delete" parameterType="int">
+        UPDATE t_subject SET state WHERE id = #{id}
+    </update>
 </mapper>

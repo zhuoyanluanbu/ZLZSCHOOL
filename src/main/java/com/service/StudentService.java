@@ -1,5 +1,8 @@
 package com.service;
 
+import com.entity.FamilyMember;
+import com.entity.PersonalPlan;
+import com.entity.Sanction;
 import com.entity.Student;
 import org.springframework.stereotype.Service;
 
@@ -21,4 +24,12 @@ public interface StudentService {
     List<Student> getStudentByClassId(int classsId) throws SQLException;
 
     Student getStudentById(long id) throws SQLException;
+
+    Sanction insertSanction(Sanction sanction) throws SQLException;
+
+    List<Sanction> getAllSanctions(int stu_id) throws SQLException;
+
+    List<PersonalPlan> getAllPersonalPlans(int stu_Id) throws SQLException;
+
+    List<FamilyMember> getAllFamilyMembers(int stu_Id) throws SQLException;
 }

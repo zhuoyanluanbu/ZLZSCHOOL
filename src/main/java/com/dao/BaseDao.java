@@ -16,4 +16,5 @@ public interface BaseDao<T,C> {
 
     List<T> selectByName(String name) throws SQLException;
 
+    int delete(int id) throws SQLException;
 }

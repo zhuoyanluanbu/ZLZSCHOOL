@@ -50,7 +50,6 @@ public class ClasssController {
     @RequestMapping(value = "/all",method = RequestMethod.GET)
     public List<Classs> getAllClass() throws Exception{
         return classsService.getAllClasses();
-//        throw new Exception("ccc");
     }
 
 }

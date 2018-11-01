@@ -41,16 +41,16 @@
         UPDATE <include refid="table_name" />
         <set>
             <if test="relationship != null">
-                relationship = #{relationship}
+                relationship = #{relationship},
             </if>
             <if test="name != null">
-                name = #{name}
+                name = #{name},
             </if>
             <if test="workunit != null">
-                workunit = #{workunit}
+                workunit = #{workunit},
             </if>
             <if test="phone != null">
-                phone = #{phone}
+                phone = #{phone},
             </if>
             <if test="remark != null">
                 remark = #{remark}

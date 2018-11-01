@@ -26,7 +26,7 @@
             keyColumn="id"
             keyProperty="id">
         INSERT INTO <include refid="table_name" /> (<include refid="Base_Column_List"/>)
-        VALUES (#{id},#{goal},#{finished_time},#{remark},#{state},#{stu_id}
+        VALUES (#{id},#{goal},#{finished_time},#{remark},#{state},#{stu_id})
         <selectKey resultType="int" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -36,13 +36,13 @@
         UPDATE <include refid="table_name" />
         <set>
             <if test="goal != null">
-                goal = #{goal}
+                goal = #{goal},
             </if>
             <if test="finished_time != null">
-                finished_time = #{finished_time}
+                finished_time = #{finished_time},
             </if>
             <if test="remark != null">
-                remark = #{remark}
+                remark = #{remark},
             </if>
         </set>
         WHERE id = #{id}

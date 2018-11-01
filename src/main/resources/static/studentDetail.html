@@ -7,50 +7,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
-    <style>
-        .pageTitle{
-            text-align: center;
-            width: 100%;
-        }
-        .personalBaseMessage{
-            width: 90%;
-            margin: auto;
-            text-align: center;
-            background-color: khaki;
-            border-radius: 1em;
-            padding-top: 1em;
-            padding-bottom: 1em;
-        }
-        .editBtn{
-            position: absolute;
-            height: 1em;
-            width: 1em;
-            right: 11%;
-        }
-        .editBtn img{
-            width: 1em;
-        }
-        .personalBaseMessage .title{
-            font-size: 0.9em;
-            color: orange;
-            margin-bottom: 0.45em;
-        }
-        .personalBaseMessage p{
-            width: 90%;
-            margin: 0em auto;
-            text-align: left;
-        }
-        .personalBaseMessage span:first-child{
-            margin-right: 0.1em;
-        }
-        .personalBaseMessage span{
-            font-size: 0.8em;
-        }
-        .pullPushPersonalBaseMessageBtn{
-            margin: 0.5em auto;
-            width: 30px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/studentDetail.css">
 </head>
 <body>
     <h3 class="pageTitle"></h3>
@@ -157,9 +114,35 @@
             <span class="remark"></span>
         </p>
     </div>
+
     <div class="pullPushPersonalBaseMessageBtn">
         <img src="img/pushPBM.png" width="30px" height="30px" /></div>
     <div class="editPersonalBaseMessage"></div>
+
+    <div class="sanction" state="shrink">
+        <p class="title">学生奖罚记录<span>添加</span></p>
+        <table>
+            <thead>
+                <tr>
+                    <td>时间</td><td>奖罚级别</td><td>名称</td><td>等级</td><td>其他</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="sanctionEditMask">
+        <div class="sanctionEdit">
+            <p>时间: <input name="time" type="date" /></p>
+            <p>奖罚级别: <input name="rank" type="text" /></p>
+            <p>名称: <input name="name" type="text" /></p>
+            <p>等级: <input name="level" type="text" /></p>
+            <p>其他: <input name="other" type="text" /></p>
+            <button class="confirm">确 定</button>
+        </div>
+        <p class="close"><img src="img/close_btn.png" width="100%" height="100%"></p>
+    </div>
+
     <script type="application/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="application/javascript" src="js/common.js"></script>
     <script>

@@ -40,19 +40,19 @@
         UPDATE t_stu_sanction
         <set>
             <if test="time != null">
-              time = #{time}
+              time = #{time},
             </if>
             <if test="sanctionrank != null">
-                sanctionrank = #{sanctionrank}
+                sanctionrank = #{sanctionrank},
             </if>
             <if test="sanctionname != null">
-                sanctionname = #{sanctionname}
+                sanctionname = #{sanctionname},
             </if>
             <if test="level != null">
-                level = #{level}
+                level = #{level},
             </if>
             <if test="other != null">
-                other = #{other}
+                other = #{other},
             </if>
             <if test="remark != null">
                 remark = #{remark}

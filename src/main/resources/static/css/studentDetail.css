@@ -1,0 +1,115 @@
+.pageTitle{
+    text-align: center;
+    width: 100%;
+}
+.personalBaseMessage{
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    background-color: khaki;
+    border-radius: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.editBtn{
+    position: absolute;
+    height: 1em;
+    width: 1em;
+    right: 11%;
+}
+.editBtn img{
+    width: 1em;
+}
+.personalBaseMessage .title{
+    font-size: 0.95em;
+    color: orange;
+    margin-bottom: 0.45em;
+}
+.personalBaseMessage p{
+    width: 90%;
+    margin: 0em auto;
+    text-align: left;
+}
+.personalBaseMessage span:first-child{
+    margin-right: 0.1em;
+}
+.personalBaseMessage span{
+    font-size: 0.8em;
+}
+.pullPushPersonalBaseMessageBtn{
+    margin: 0.5em auto;
+    width: 30px;
+}
+.sanction{
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    background-color: peachpuff;
+    border-radius: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.sanction .title{
+    font-size: 0.95em;
+    color: #ff928e;
+    margin: 0 auto 0.45em 5%;
+    text-align: left;
+    width: 90%;
+}
+.sanction .title span{
+    margin-right: 0;
+    position: absolute;
+    right: 12%;
+    text-decoration: underline;
+}
+.sanction table{
+    width: 94%;
+    font-size: 0.8em;
+    margin-left: 3%;
+}
+.sanctionEditMask{
+    position: fixed;
+    background-color: rgba(0,0,0,.3);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+}
+.sanctionEdit{
+    width: 90%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin: 40% 5% auto 5%;
+    background-color: white;
+    color: black;
+    border-radius: 1.5em;
+}
+.sanctionEdit p{
+    margin: 0.8em auto;
+    text-align: left;
+    width: 90%;
+    margin-left: 10%;
+}
+.sanctionEdit input{
+    border: solid lightgray 1px;
+    height: 2em;
+    margin-left: 1.5em;
+    border-radius: 1em;
+    width: 60%;
+}
+.sanctionEdit .confirm{
+    height: 2.4em;
+    width: 40%;
+    margin: 0em auto;
+    border-radius: 1.2em;
+    border: none;
+    background-color: orange;
+    color: white;
+}
+.sanctionEditMask .close{
+    width: 2em;
+    height: 2em;
+    margin: 1em auto;
+}

@@ -120,7 +120,7 @@
     <div class="editPersonalBaseMessage"></div>
 
     <div class="sanction" state="shrink">
-        <p class="title">学生奖罚记录<span>添加</span></p>
+        <p class="title">学生奖罚记录<span class="add">添加</span></p>
         <table>
             <thead>
                 <tr>
@@ -133,6 +133,7 @@
     </div>
     <div class="sanctionEditMask">
         <div class="sanctionEdit">
+            <input type="hidden" name="id" />
             <p>时间: <input name="time" type="date" /></p>
             <p>奖罚级别: <input name="rank" type="text" /></p>
             <p>名称: <input name="name" type="text" /></p>
@@ -143,65 +144,164 @@
         <p class="close"><img src="img/close_btn.png" width="100%" height="100%"></p>
     </div>
 
+
+    <div class="personalPlan">
+        <p class="title">个人规划<span class="add">添加</span></p>
+        <table>
+            <thead>
+                <tr>
+                    <td>目标</td><td>完成时间</td><td>备注</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="personalPlanEditMask">
+        <div class="personalPlanEdit">
+            <input type="hidden" name="id" />
+            <p>目标: <input name="goal" type="text" /></p>
+            <p>完成时间: <input name="finishTime" type="date" /></p>
+            <p>备注: <input name="remark" type="text" /></p>
+            <button class="confirm">确 定</button>
+        </div>
+        <p class="close"><img src="img/close_btn.png" width="100%" height="100%"></p>
+    </div>
+
+
+    <div class="familyMember">
+        <p class="title">家庭主要成员<span class="add">添加</span></p>
+        <table>
+            <thead>
+                <tr>
+                  <td>关系</td><td>姓名</td><td>工作单位</td><td>联系电话</td><td>备注</td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="familyMemberEditMask">
+        <div class="familyMemberEdit">
+            <input type="hidden" name="id" />
+            <p>关系: <input name="relationship" type="text" /></p>
+            <p>姓名: <input name="name" type="text" /></p>
+            <p>工作单位: <input name="workunit" type="text" /></p>
+            <p>联系电话: <input name="phone" type="text" /></p>
+            <p>备注: <input name="remark" type="text" /></p>
+            <button class="confirm">确 定</button>
+        </div>
+        <p class="close"><img src="img/close_btn.png" width="100%" height="100%"></p>
+    </div>
+
     <script type="application/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="application/javascript" src="js/common.js"></script>
+    <script type="application/javascript" src="js/stuDetail_personalMessage.js"></script>
+    <script type="application/javascript" src="js/stuDetail_sanction.js"></script>
+    <script type="application/javascript" src="js/stuDetail_personalPlan.js"></script>
     <script>
-        var getStuDetail = function(){
-            httpGet('/student/stuid?stuId='+getRequestParam()['stuid'])
-                    .then(function(stu){
-                        $('title').html(stu.studentName)
-                        $('.pageTitle').html(stu.studentName)
-                        $('.stuName').html(stu.studentName)
-                        $('.stuSex').html(stu.sex==0?'女':'男')
-                        $('.stuBirthday').html(stu.birthday)
-                        $('.stuEducationallevel').html(stu.educationallevel)
-                        $('.stuPoliticalstatus').html(stu.politicalstatus)
-                        $('.stuIdNumber').html(stu.idnumber)
-                        $('.phone').html(stu.phone)
-                        $('.homeAddress').html(stu.homeaddress)
-                        $('.QQ').html(stu.qqnumber)
-                        $('.wechat').html(stu.wechatnumber)
-                        $('.isSmoke').html(stu.issmoke==-1?'未知':(stu.issmoke==0?'否':'是'))
-                        $('.smokeAge').html(stu.smokeage)
-                        $('.whySmoke').html(stu.whysmoke)
-                        $('.isLove').html(stu.islove==-1?'未知':(stu.islove==0?'否':'是'))
-                        $('.whyLove').html(stu.whylove)
-                        $('.lover').html(stu.loverinformation)
-                        $('.isViolence').html(stu.isviolence==-1?'未知':(stu.isviolence==0?'否':'是'))
-                        $('.whyViolence').html(stu.whyviolence)
-                        $('.medicalhistory').html(stu.medicalhistory)
-                        $('.lifeexpenses').html(stu.lifeexpenses)
-                        $('.homeincome').html(stu.homeincome)
-                        $('.hobby').html(stu.hobby)
-                        $('.performance').html(stu.performance)
-                        $('.remark').html(stu.remark)
-                    })
-                    .catch(function(err){dealHttpErr(err)})
-        }()
-
-        var personalBaseMessageDivSpreadHeight = $('.personalBaseMessage').css('height')
-        var personalBaseMessageDivShrinkHeight = '1.33em'
-        $('.pullPushPersonalBaseMessageBtn').click(function(){
-            var state = $('.personalBaseMessage').attr('state')
-            if (state === 'spread'){
-                $('.personalBaseMessage').attr('state','shrink')
-                $('.personalBaseMessage').animate({height:personalBaseMessageDivShrinkHeight},'fast')
-                $('.pullPushPersonalBaseMessageBtn img').attr('src','img/pullPBM.png')
-                $('.personalBaseMessage p:not(:first)').css('display','none')
-            }else{
-                $('.personalBaseMessage').attr('state','spread')
-                $('.personalBaseMessage').animate({height:personalBaseMessageDivSpreadHeight},'fast')
-                $('.pullPushPersonalBaseMessageBtn img').attr('src','img/pushPBM.png')
-                $('.personalBaseMessage p:not(:first)').css('display','block')
-            }
-        })
-
         /*
-        * 跳转到编辑
+        * 获取个人规划
         * */
-        $('.personalBaseMessage .editBtn').click(function(){
-            location.href = '/studentEdit.html?stuid='+getRequestParam()['stuid']
+        var getFamilyMembersByStuId = function(){
+            httpGet('/student/families?stuId='+getRequestParam()['stuid']).then(function(familyMembers){
+                console.log(familyMembers)
+                if (familyMembers.length > 0){
+                    var tr = ''
+                    for (var f in familyMembers){
+                        var fa = familyMembers[f];
+                        tr += '<tr faid="'+fa.id+'"farelationship="'+
+                            fa.relationship+'" faname="'+
+                            fa.name+'" faworkunit="'+
+                            fa.workunit+'" faphone="'+
+                            fa.phone+'" faremark="'+
+                            fa.remark+'">' +
+                                '<td>'+fa.relationship+'</td>'+
+                                '<td>'+fa.name+'</td>'+
+                                '<td>'+fa.workunit+'</td>'+
+                                '<td>'+fa.phone+'</td>'+
+                                '<td>'+fa.remark+'</td>'+
+                            '</tr>'
+                    }
+                    $('.familyMember tbody').html(tr);
+                    $('.familyMember table tbody tr').click(function () {
+                        var id = $(this).attr('faid')
+                        var farelationship = $(this).attr('farelationship')
+                        var faname = $(this).attr('faname')
+                        var faworkunit = $(this).attr('faworkunit')
+                        var faphone = $(this).attr('faphone')
+                        var faremark = $(this).attr('faremark')
+                        setFamilyMemberEditValue(new FamilyMember(id,farelationship,faname,faworkunit,faphone,faremark,getRequestParam()['stuid']))
+                        familyMemberEditMaskDisplay(true);
+                    })
+                }
+            }).catch(function(err){
+                dealHttpErr(err)
+            })
+        }
+        getFamilyMembersByStuId()
+
+        //个人规划添加按钮
+        $('.familyMember .add').click(function(){
+            familyMemberEditMaskDisplay(true)
         })
+        /*
+        *关闭个人规划弹窗
+        * */
+        $('.familyMemberEditMask .close').click(function(){
+            familyMemberEditMaskDisplay(false)
+        })
+        $('.familyMemberEditMask .confirm').click(function(){
+            familyMemberEditMaskConfirm()
+        })
+        var familyMemberEditMaskDisplay = function(isOpen){
+            if (isOpen) {
+                $('.familyMemberEditMask').css('display','block')
+            }else {
+                $('.familyMemberEditMask').css('display','none')
+                cleanFamilyMemberEditValue()
+            }
+        }
+        var cleanFamilyMemberEditValue = function(){
+            $('.familyMemberEdit input[name="id"]').val('')
+            $('.familyMemberEdit input[name="relationship"]').val('')
+            $('.familyMemberEdit input[name="name"]').val('')
+            $('.familyMemberEdit input[name="workunit"]').val('')
+            $('.familyMemberEdit input[name="phone"]').val('')
+            $('.familyMemberEdit input[name="remark"]').val('')
+        }
+        var setFamilyMemberEditValue = function(fa){
+            $('.familyMemberEdit input[name="id"]').val(fa.id)
+            $('.familyMemberEdit input[name="relationship"]').val(fa.relationship)
+            $('.familyMemberEdit input[name="name"]').val(fa.name)
+            $('.familyMemberEdit input[name="workunit"]').val(fa.workunit)
+            $('.familyMemberEdit input[name="phone"]').val(fa.phone)
+            $('.familyMemberEdit input[name="remark"]').val(fa.remark)
+        }
+        var familyMemberEditMaskConfirm = function(){
+            var id = $('.familyMemberEdit input[name="id"]').val()
+            var relationship = $('.familyMemberEdit input[name="relationship"]').val()
+            if (!relationship) {alert('请填写关系');return;}
+            var name = $('.familyMemberEdit input[name="name"]').val()
+            if (!name) {alert('请填写姓名');return}
+            var workunit = $('.familyMemberEdit input[name="workunit"]').val()
+            var phone = $('.familyMemberEdit input[name="phone"]').val()
+            var remark = $('.familyMemberEdit input[name="remark"]').val()
+            postFamilyMember(new FamilyMember(id,relationship,name,workunit,phone,remark,getRequestParam()['stuid']))
+        }
+        var postFamilyMember = function(familyMember){
+            httpPost('/student/families',familyMember).then(function(fa){
+                if (familyMember.id==fa.id){
+                    alert('修改成功')
+                }else {
+                    alert('增加成功')
+                }
+                getFamilyMembersByStuId()
+                familyMemberEditMaskDisplay(false)
+            }).catch(function(err){
+                dealHttpErr(err)
+            })
+        }
 
     </script>
 </body>

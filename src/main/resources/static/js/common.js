@@ -90,3 +90,44 @@ var Student = function(id,studentnum,studentName,birthday,politicalstatus,educat
     this.smokeage = smokeage||0;
     this.islove = islove||-1;
 }
+
+/*
+* 奖罚对象
+* */
+var Sanction = function (id,time,sanctionrank,sanctionname,level,other,remark,state,stu_id) {
+    this.id = id || 0;
+    this.time = time;
+    this.sanctionrank = sanctionrank;//奖罚级别
+    this.sanctionname = sanctionname;//将罚名
+    this.level = level;
+    this.other = other;//其他
+    this.remark = remark || '';//备注
+    this.state = state || 0;//状态
+    this.stu_id = stu_id;
+}
+
+/*
+* 个人规划对象
+* */
+var PersonalPlan = function(id,goal,finished_time,remark,stu_id){
+    this.id = id || 0;
+    this.goal = goal;
+    this.finished_time = finished_time;
+    this.remark = remark;
+    this.state = 0;
+    this.stu_id = stu_id;
+}
+
+/*
+* 学生家庭成员
+* */
+var FamilyMember = function(id, relationship, name, workunit, phone, remark, stu_id){
+    this.id = id || 0;
+    this.relationship = relationship;
+    this.name = name;
+    this.workunit = workunit;
+    this.phone = phone;
+    this.remark = remark;
+    this.state = 0;
+    this.stu_id = stu_id;
+}

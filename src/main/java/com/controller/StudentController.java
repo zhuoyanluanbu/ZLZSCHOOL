@@ -60,10 +60,10 @@ public class StudentController {
         return studentService.getStudentByClassId(classsId);
     }
 
-    //增加一个学生的奖罚记录
+    //增加或者更新一个学生的奖罚记录
     @RequestMapping(value = "/sanction",method = RequestMethod.POST)
-    public Sanction addSanctions(@RequestBody Sanction sanction) throws Exception{
-        return studentService.insertSanction(sanction);
+    public Sanction addOrUpdateSanctions(@RequestBody Sanction sanction) throws Exception{
+        return studentService.insertOrUpdateSanction(sanction);
     }
 
     //查找学生的奖罚记录
@@ -72,16 +72,28 @@ public class StudentController {
         return studentService.getAllSanctions(stuId);
     }
 
-    //查找学生的奖罚记录
+    //查找学生的个人规划
     @RequestMapping(value = "/personalplan",method = RequestMethod.GET)
     public List<PersonalPlan> getPersonalAllPlans(int stuId) throws Exception{
         return studentService.getAllPersonalPlans(stuId);
+    }
+
+    //增加或者更新学生的个人规划
+    @RequestMapping(value = "/personalplan",method = RequestMethod.POST)
+    public PersonalPlan addOrUpdatePersonalPlan(@RequestBody PersonalPlan personalPlan) throws Exception{
+        return studentService.insertOrUpdatePersonalPlan(personalPlan);
     }
 
     //查找学生的家庭成员
     @RequestMapping(value = "/families",method = RequestMethod.GET)
     public List<FamilyMember> getFamilies(int stuId) throws Exception{
         return studentService.getAllFamilyMembers(stuId);
+    }
+
+    //增加或者修改家庭成员
+    @RequestMapping(value = "/families",method = RequestMethod.POST)
+    public FamilyMember addOrUpdateFamiliyMember(@RequestBody FamilyMember familyMember) throws Exception{
+        return studentService.insertOrUpdateFamilyMember(familyMember);
     }
 
 }

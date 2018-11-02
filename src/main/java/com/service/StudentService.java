@@ -25,11 +25,15 @@ public interface StudentService {
 
     Student getStudentById(long id) throws SQLException;
 
-    Sanction insertSanction(Sanction sanction) throws SQLException;
+    Sanction insertOrUpdateSanction(Sanction sanction) throws SQLException;
 
     List<Sanction> getAllSanctions(int stu_id) throws SQLException;
 
+    PersonalPlan insertOrUpdatePersonalPlan(PersonalPlan personalPlan) throws SQLException;
+
     List<PersonalPlan> getAllPersonalPlans(int stu_Id) throws SQLException;
+
+    FamilyMember insertOrUpdateFamilyMember(FamilyMember familyMember) throws SQLException;
 
     List<FamilyMember> getAllFamilyMembers(int stu_Id) throws SQLException;
 }

@@ -6,7 +6,7 @@
     width: 90%;
     margin: auto;
     text-align: center;
-    background-color: khaki;
+    background-color: #00000017;
     border-radius: 1em;
     padding-top: 1em;
     padding-bottom: 1em;
@@ -22,7 +22,7 @@
 }
 .personalBaseMessage .title{
     font-size: 0.95em;
-    color: orange;
+    color: black;
     margin-bottom: 0.45em;
 }
 .personalBaseMessage p{
@@ -44,14 +44,14 @@
     width: 90%;
     margin: auto;
     text-align: center;
-    background-color: peachpuff;
+    background-color: #00000017;
     border-radius: 1em;
     padding-top: 1em;
     padding-bottom: 1em;
 }
 .sanction .title{
     font-size: 0.95em;
-    color: #ff928e;
+    color: black;
     margin: 0 auto 0.45em 5%;
     text-align: left;
     width: 90%;
@@ -61,11 +61,21 @@
     position: absolute;
     right: 12%;
     text-decoration: underline;
+    font-size: 0.8em;
 }
 .sanction table{
     width: 94%;
     font-size: 0.8em;
     margin-left: 3%;
+    border: solid 1px whitesmoke;
+    border-collapse:collapse;
+    border-radius: 0.7em;
+}
+.sanction td{
+    border: solid 1px whitesmoke;
+}
+.sanction tbody {
+    font-size: 0.5em;
 }
 .sanctionEditMask{
     position: fixed;
@@ -76,6 +86,7 @@
     bottom: 0;
     left: 0;
     text-align: center;
+    display: none;
 }
 .sanctionEdit{
     width: 90%;
@@ -109,6 +120,180 @@
     color: white;
 }
 .sanctionEditMask .close{
+    width: 2em;
+    height: 2em;
+    margin: 1em auto;
+}
+
+
+
+.personalPlan{
+    width: 90%;
+    margin: 2em auto;
+    text-align: center;
+    background-color: #00000017;
+    border-radius: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.personalPlan .title{
+    font-size: 0.95em;
+    color: black;
+    margin: 0 auto 0.45em 5%;
+    text-align: left;
+    width: 90%;
+}
+.personalPlan .title span{
+    margin-right: 0;
+    position: absolute;
+    right: 12%;
+    text-decoration: underline;
+    font-size: 0.8em;
+}
+.personalPlan table{
+    width: 94%;
+    font-size: 0.8em;
+    margin-left: 3%;
+    border: solid 1px whitesmoke;
+    border-collapse:collapse;
+    border-radius: 0.7em;
+}
+.personalPlan td{
+    border: solid 1px whitesmoke;
+}
+.personalPlan tbody {
+    font-size: 0.5em;
+}
+.personalPlanEditMask{
+    position: fixed;
+    background-color: rgba(0,0,0,.3);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    display: none;
+}
+.personalPlanEdit{
+    width: 90%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin: 40% 5% auto 5%;
+    background-color: white;
+    color: black;
+    border-radius: 1.5em;
+}
+.personalPlanEdit p{
+    margin: 0.8em auto;
+    text-align: left;
+    width: 90%;
+    margin-left: 10%;
+}
+.personalPlanEdit input{
+    border: solid lightgray 1px;
+    height: 2em;
+    margin-left: 1.5em;
+    border-radius: 1em;
+    width: 60%;
+}
+.personalPlanEdit .confirm{
+    height: 2.4em;
+    width: 40%;
+    margin: 0em auto;
+    border-radius: 1.2em;
+    border: none;
+    background-color: orange;
+    color: white;
+}
+.personalPlanEditMask .close{
+    width: 2em;
+    height: 2em;
+    margin: 1em auto;
+}
+
+
+
+.familyMember{
+    width: 90%;
+    margin: 2em auto;
+    text-align: center;
+    background-color: #00000017;
+    border-radius: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.familyMember .title{
+    font-size: 0.95em;
+    color: black;
+    margin: 0 auto 0.45em 5%;
+    text-align: left;
+    width: 90%;
+}
+.familyMember .title span{
+    margin-right: 0;
+    position: absolute;
+    right: 12%;
+    text-decoration: underline;
+    font-size: 0.8em;
+}
+.familyMember table{
+    width: 94%;
+    font-size: 0.8em;
+    margin-left: 3%;
+    border: solid 1px whitesmoke;
+    border-collapse:collapse;
+    border-radius: 0.7em;
+}
+.familyMember td{
+    border: solid 1px whitesmoke;
+}
+.familyMember tbody {
+    font-size: 0.5em;
+}
+.familyMemberEditMask{
+    position: fixed;
+    background-color: rgba(0,0,0,.3);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    display: none;
+}
+.familyMemberEdit{
+    width: 90%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin: 40% 5% auto 5%;
+    background-color: white;
+    color: black;
+    border-radius: 1.5em;
+}
+.familyMemberEdit p{
+    margin: 0.8em auto;
+    text-align: left;
+    width: 90%;
+    margin-left: 10%;
+}
+.familyMemberEdit input{
+    border: solid lightgray 1px;
+    height: 2em;
+    margin-left: 1.5em;
+    border-radius: 1em;
+    width: 60%;
+}
+.familyMemberEdit .confirm{
+    height: 2.4em;
+    width: 40%;
+    margin: 0em auto;
+    border-radius: 1.2em;
+    border: none;
+    background-color: orange;
+    color: white;
+}
+.familyMemberEditMask .close{
     width: 2em;
     height: 2em;
     margin: 1em auto;

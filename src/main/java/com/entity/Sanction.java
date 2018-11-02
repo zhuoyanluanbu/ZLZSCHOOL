@@ -9,7 +9,7 @@ public class Sanction extends MyObject {
 
     private int id;
 
-    private Date time;
+    private String time;
 
     private String sanctionrank;//奖罚级别
 
@@ -33,11 +33,11 @@ public class Sanction extends MyObject {
         this.id = id;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -100,7 +100,7 @@ public class Sanction extends MyObject {
     public Sanction() {
     }
 
-    public Sanction(int id, Date time, String sanctionrank, String sanctionname, String level, String other, String remark, String state, int stu_id) {
+    public Sanction(int id, String time, String sanctionrank, String sanctionname, String level, String other, String remark, String state, int stu_id) {
         this.id = id;
         this.time = time;
         this.sanctionrank = sanctionrank;

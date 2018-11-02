@@ -8,7 +8,7 @@ import java.util.Date;
 public class PersonalPlan extends MyObject {
     private int id;
     private String goal;
-    private Date finished_time;
+    private String finished_time;
     private String remark;
     private int state = 0;
     private int stu_id = -1;
@@ -37,11 +37,11 @@ public class PersonalPlan extends MyObject {
         this.goal = goal;
     }
 
-    public Date getFinished_time() {
+    public String getFinished_time() {
         return finished_time;
     }
 
-    public void setFinished_time(Date finished_time) {
+    public void setFinished_time(String finished_time) {
         this.finished_time = finished_time;
     }
 
@@ -64,7 +64,7 @@ public class PersonalPlan extends MyObject {
     public PersonalPlan() {
     }
 
-    public PersonalPlan(int id, String goal, Date finished_time, String remark, int state, int stu_id) {
+    public PersonalPlan(int id, String goal, String finished_time, String remark, int state, int stu_id) {
         this.id = id;
         this.goal = goal;
         this.finished_time = finished_time;

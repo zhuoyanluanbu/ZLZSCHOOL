@@ -30,8 +30,8 @@
             keyColumn="id"
             keyProperty="id">
         INSERT INTO <include refid="table_name" /> (<include refid="Base_Column_List"/>)
-        VALUES (#{id},#{time},#{sanctionrank},#{sanctionname},#{level},#{other},#{remark},
-        #{state},#{stu_id})
+        VALUES (#{id},#{relationship},#{name},#{workunit},#{phone},#{remark},
+        0,#{stu_id})
         <selectKey resultType="int" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -63,7 +63,7 @@
         UPDATE <include refid="table_name" /> SET state=1 WHERE id = #{id}
     </update>
 
-    <select id="queryAllSanctions" parameterType="int" resultMap="FamilyMember">
+    <select id="queryAllFamilyMembers" parameterType="int" resultMap="FamilyMember">
         SELECT * FROM <include refid="table_name" /> WHERE stu_id = #{stu_id}
     </select>
 

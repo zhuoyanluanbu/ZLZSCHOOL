@@ -58,8 +58,12 @@ public class StudentServiceImpl implements StudentService {
         return studentDao.selectById(id);
     }
 
-    public Sanction insertSanction(Sanction sanction) throws SQLException{
-        sanctionDao.insert(sanction);
+    public Sanction insertOrUpdateSanction(Sanction sanction) throws SQLException{
+        if (sanction.getId() < 1){
+            sanctionDao.insert(sanction);
+        }else {
+            sanctionDao.update(sanction);
+        }
         return sanction;
     }
 
@@ -69,8 +73,28 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public PersonalPlan insertOrUpdatePersonalPlan(PersonalPlan personalPlan) throws SQLException {
+        if (personalPlan.getId() < 1){
+            personalPlanDao.insert(personalPlan);
+        }else {
+            personalPlanDao.update(personalPlan);
+        }
+        return personalPlan;
+    }
+
+    @Override
     public List<PersonalPlan> getAllPersonalPlans(int stu_Id) throws SQLException {
         return personalPlanDao.queryAllPersonalPlan(stu_Id);
+    }
+
+    @Override
+    public FamilyMember insertOrUpdateFamilyMember(FamilyMember familyMember) throws SQLException {
+        if(familyMember.getId()<1){
+            familyMemberDao.insert(familyMember);
+        }else {
+            familyMemberDao.update(familyMember);
+        }
+        return familyMember;
     }
 
     @Override

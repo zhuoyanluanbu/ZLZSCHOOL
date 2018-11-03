@@ -1,13 +1,7 @@
 package com.service;
 
-import com.dao.FamilyMemberDao;
-import com.dao.PersonalPlanDao;
-import com.dao.SanctionDao;
-import com.dao.StudentDao;
-import com.entity.FamilyMember;
-import com.entity.PersonalPlan;
-import com.entity.Sanction;
-import com.entity.Student;
+import com.dao.*;
+import com.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +24,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     FamilyMemberDao familyMemberDao;
+
+    @Autowired
+    CommunicationDao communicationDao;
 
     @Override
     public Student insert(Student student) throws SQLException {
@@ -100,6 +97,46 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<FamilyMember> getAllFamilyMembers(int stu_Id) throws SQLException {
         return familyMemberDao.queryAllFamilyMembers(stu_Id);
+    }
+
+    @Override
+    public Communication insertOrUpdateCommunicationFamily(Communication communication) throws SQLException {
+        if (communication.getId() < 1){
+            communicationDao.insert(communication);
+        }else {
+            communicationDao.update(communication);
+        }
+        return communication;
+    }
+
+    @Override
+    public Communication selectFamilyCommunicationById(int id) throws SQLException {
+        return communicationDao.selectFamilyCommunicationById(id);
+    }
+
+    @Override
+    public List<Communication> getAllFamilyCommunications(int stu_id) throws SQLException {
+        return communicationDao.getAllFamilyCommunications(stu_id);
+    }
+
+    @Override
+    public Communication insertOrUpdateCommunicationStudent(Communication communication) throws SQLException {
+        if (communication.getId() < 1){
+            communicationDao.insert(communication);
+        }else {
+            communicationDao.update(communication);
+        }
+        return communication;
+    }
+
+    @Override
+    public Communication selectStudentCommunicationById(int id) throws SQLException {
+        return communicationDao.selectStudentCommunicationById(id);
+    }
+
+    @Override
+    public List<Communication> getAllStudentCommunications(int stu_id) throws SQLException {
+        return communicationDao.getAllStudentCommunications(stu_id);
     }
 
 }

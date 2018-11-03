@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.CommunicationDao">
+    <resultMap id="FamilyCommunication" type="com.entity.FamilyCommunication">
+        <id column="id" property="id" />
+        <result column="topic" property="topic" />
+        <result column="time" property="time" />
+        <result column="contentSummary" property="contentSummary" />
+        <result column="toWho" property="toWho" />
+        <result column="feedback" property="feedback" />
+        <result column="stu_id" property="stu_id" />
+        <result column="remark" property="remark" />
+    </resultMap>
+    <sql id="Base_Column_List_Family">
+        id,topic,time,contentSummary,toWho,feedback,stu_id,remark
+    </sql>
+    <sql id="table_name_family">
+        t_stu_communication_family
+    </sql>
+    <insert id="insertCommunicationFamily" parameterType="com.entity.Communication" useGeneratedKeys="true"
+            keyColumn="id"
+            keyProperty="id">
+        INSERT INTO <include refid="table_name_family" /> (<include refid="Base_Column_List_Family"/>)
+        VALUES (#{id},#{topic},#{time},#{contentSummary},#{toWho},#{feedback},#{stu_id},#{remark})
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+    <update id="updateCommunicationFamily" parameterType="com.entity.Communication">
+        UPDATE <include refid="table_name_family" />
+        <set>
+            <if test="topic != null">
+                topic = #{topic},
+            </if>
+            <if test="time != null">
+                time = #{time},
+            </if>
+            <if test="contentSummary != null">
+                contentSummary = #{contentSummary},
+            </if>
+            <if test="toWho != null">
+                toWho = #{toWho},
+            </if>
+            <if test="feedback != null">
+                feedback = #{feedback},
+            </if>
+            <if test="feedback != null">
+                remark = #{remark},
+            </if>
+            <if test="stu_id != null">
+                stu_id = #{stu_id},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    <select id="selectFamilyCommunicationById" parameterType="int" resultMap="FamilyCommunication">
+        SELECT * FROM <include refid="table_name_family" /> WHERE id = #{id}
+    </select>
+    <select id="getAllFamilyCommunications" parameterType="int" resultMap="FamilyCommunication">
+        SELECT * FROM <include refid="table_name_family" /> WHERE stu_id = #{stu_id}
+    </select>
+
+
+
+
+
+    <resultMap id="StudentCommunication" type="com.entity.StudentCommunication">
+        <id column="id" property="id" />
+        <result column="topic" property="topic" />
+        <result column="time" property="time" />
+        <result column="contentSummary" property="contentSummary" />
+        <result column="where" property="where" />
+        <result column="solution" property="solution" />
+        <result column="discussionResult" property="discussionResult" />
+        <result column="improvitionResult" property="improvitionResult" />
+        <result column="stu_id" property="stu_id" />
+        <result column="remark" property="remark" />
+    </resultMap>
+    <sql id="Base_Column_List_Student">
+        id,topic,time,contentSummary,where,solution,discussionResult,improvitionResult,stu_id,remark
+    </sql>
+    <sql id="table_name_student">
+        t_stu_communication_student
+    </sql>
+    <insert id="insertCommunicationStudent" parameterType="com.entity.Communication" useGeneratedKeys="true"
+            keyColumn="id"
+            keyProperty="id">
+        INSERT INTO <include refid="table_name_student" /> (<include refid="Base_Column_List_Student"/>)
+        VALUES (#{id},#{topic},#{time},#{contentSummary},#{where},#{solution},#{discussionResult},#{improvitionResult},
+        #{stu_id},#{remark})
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+    <update id="updateCommunicationStudent" parameterType="com.entity.Communication">
+        UPDATE <include refid="table_name_student" />
+        <set>
+            <if test="topic != null">
+                topic = #{topic},
+            </if>
+            <if test="time != null">
+                time = #{time},
+            </if>
+            <if test="contentSummary != null">
+                contentSummary = #{contentSummary},
+            </if>
+            <if test="where != null">
+                where = #{where},
+            </if>
+            <if test="solution != null">
+                solution = #{solution},
+            </if>
+            <if test="discussionResult != null">
+                discussionResult = #{discussionResult},
+            </if>
+            <if test="improvitionResult != null">
+                improvitionResult = #{improvitionResult},
+            </if>
+            <if test="stu_id != null">
+                stu_id = #{stu_id},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    <select id="selectStudentCommunicationById" parameterType="int" resultMap="StudentCommunication">
+        SELECT * FROM <include refid="table_name_student" /> WHERE id = #{id}
+    </select>
+    <select id="getAllStudentCommunications" parameterType="int" resultMap="StudentCommunication">
+        SELECT * FROM <include refid="table_name_student" /> WHERE stu_id = #{stu_id}
+    </select>
+</mapper>
